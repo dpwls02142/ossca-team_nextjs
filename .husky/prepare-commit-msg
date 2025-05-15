@@ -35,4 +35,4 @@ fi
 echo "$MODIFIED_MSG" > "$COMMIT_MSG_FILE"
 
 # 지라 태스크 번호 추가
-pnpm jira-prepare-commit-msg $1
+npx jira-prepare-commit-msg $1
