@@ -1,11 +1,13 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
 COMMIT_MSG_FILE=$1
 COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
 
+# 원본 커밋 메시지에서 이모티콘과 JIRA ID를 제거하고 검사
+STRIPPED_MSG=$(echo "$COMMIT_MSG" | sed -E 's/^[^a-zA-Z]* *//' | sed -E 's/\[WEB-[0-9]+\] *//')
+
 # 커밋 타입(예: feat, fix, chore 등)이 있는지 확인
-if ! echo "$COMMIT_MSG" | grep -Eq "^(feat|fix|chore|docs|style|refactor|test|perf|build|ci|revert)(\(.+\))?: "; then
+if ! echo "$STRIPPED_MSG" | grep -Eq "^(feat|fix|chore|docs|style|refactor|test|perf|build|ci|revert)(\(.+\))?: "; then
   echo "❌ 커밋 메시지에 커밋 타입이 없습니다."
   echo "💡 예시: feat: 로그인 기능 추가"
   exit 1

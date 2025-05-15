@@ -1,5 +1,4 @@
-#!/bin/bash
-. "$(dirname -- "$0")/_/husky.sh"
+#!/usr/bin/env bash
 
 BRANCH=$(git symbolic-ref --short HEAD)
 
