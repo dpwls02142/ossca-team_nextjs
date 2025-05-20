@@ -6,7 +6,7 @@ reviews:
   request_changes_workflow: false
   # 코드래빗이 PR 내용을 수정해서 요약
   high_level_summary: false
-  auto_title_placeholder: '@coderabbitai [WEB-nn] 커밋 타입: 커밋 메세지'
+  auto_title_placeholder: '@coderabbitai'
   # 코드래빗이 자동으로 생성해주는 시 (기본값이 true이기에 따로 설정)
   poem: false
   # 각 리뷰에 대한 상세 설명
