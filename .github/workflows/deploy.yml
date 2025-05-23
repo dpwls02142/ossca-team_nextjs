@@ -19,7 +19,7 @@ jobs:
       - name: Push to personal repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          API_TOKEN_GITHUB: ${{ secrets.YE_GIT_TO_VERCEL }}
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source-directory: 'output'
           destination-github-username: dpwls02142
