@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Copy all files to output
+        run: |
+          mkdir -p output
+          cp -R ./* ./output
+
       - name: Push to personal repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
