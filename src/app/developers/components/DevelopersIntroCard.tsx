@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
 	size?: number;
@@ -53,22 +53,6 @@ const ExternalLink = ({ size = 24, ...props }: IconProps) => (
 	</svg>
 );
 
-const Check = ({ size = 24, ...props }: IconProps) => (
-	<svg
-		width={size}
-		height={size}
-		viewBox="0 0 24 24"
-		fill="none"
-		stroke="currentColor"
-		strokeWidth="2"
-		strokeLinecap="round"
-		strokeLinejoin="round"
-		{...props}
-	>
-		<polyline points="20,6 9,17 4,12" />
-	</svg>
-);
-
 const Laptop = ({ size = 24, ...props }: IconProps) => (
 	<svg
 		width={size}
@@ -107,20 +91,8 @@ interface DevelopersIntroCardProps {
 }
 
 const DevelopersIntroCard = ({ developer }: DevelopersIntroCardProps) => {
-	const [copied, setCopied] = useState(false);
-
-	const copyEmail = async (email: string) => {
-		try {
-			await navigator.clipboard.writeText(email);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
-		} catch (err) {
-			console.error('Failed to copy email: ', err);
-		}
-	};
-
 	return (
-		<div className="flex-none w-80 h-[130] bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-teal-100/50 hover:border-teal-200 cursor-pointer hover:bg-white flex flex-col">
+		<div className="flex-none w-80 bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-teal-100/50 hover:border-teal-200 cursor-pointer hover:bg-white">
 			{/* Avatar Section */}
 			<div className="flex justify-center mb-6">
 				<div className="relative">
@@ -151,18 +123,18 @@ const DevelopersIntroCard = ({ developer }: DevelopersIntroCardProps) => {
 				</div>
 			</div>
 
-			{/* Reflection - Flexible area that takes remaining space */}
-			<div className="flex-1 mb-6 flex flex-col min-h-0">
+			{/* Reflection */}
+			<div className="mb-6">
 				<p className="text-gray-500 text-sm mb-3">Reflection</p>
-				<div className="bg-gradient-to-br from-gray-50 to-teal-50/30 rounded-xl p-4 border border-gray-100/50 flex-1 overflow-y-auto">
+				<div className="bg-gradient-to-br from-gray-50 to-teal-50/30 rounded-xl p-4 min-h-[120px] max-h-[180px] overflow-y-auto border border-gray-100/50">
 					<p className="text-gray-700 text-sm leading-relaxed break-words">
 						{developer.reflection}
 					</p>
 				</div>
 			</div>
 
-			{/* Contact Links - Fixed at bottom */}
-			<div className="pt-4 border-t border-teal-100/50 mt-auto">
+			{/* Contact Links */}
+			<div className="pt-4 border-t border-teal-100/50">
 				<div className="flex justify-center space-x-4">
 					<a
 						href={developer.links.github}
@@ -180,21 +152,12 @@ const DevelopersIntroCard = ({ developer }: DevelopersIntroCardProps) => {
 					>
 						<ExternalLink size={18} />
 					</a>
-					<button
-						onClick={() => copyEmail(developer.links.email)}
-						className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full flex items-center justify-center hover:from-emerald-200 hover:to-teal-200 hover:text-emerald-700 transition-all duration-300 shadow-sm hover:shadow-md relative"
+					<a
+						href={`mailto:${developer.links.email}`}
+						className="w-10 h-10 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full flex items-center justify-center hover:from-emerald-200 hover:to-teal-200 hover:text-emerald-700 transition-all duration-300 shadow-sm hover:shadow-md"
 					>
-						{copied ? (
-							<Check size={18} className="text-emerald-600" />
-						) : (
-							<Mail size={18} />
-						)}
-						{copied && (
-							<div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-emerald-600 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
-								Copied!
-							</div>
-						)}
-					</button>
+						<Mail size={18} />
+					</a>
 				</div>
 			</div>
 		</div>
